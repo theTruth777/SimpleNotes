@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notes</title>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <ons-splitter>
+        <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+            <ons-page>
+            <ons-list>
+                <ons-list-item id="sidebar_dashboard" tappable>Dashboard</ons-list-item>
+                <ons-list-item id="sidebar_new-note" tappable>Add new Note</ons-list-item>
+                <ons-list-item id="sidebar_export" tappable>Export notes</ons-list-item>
+            </ons-list>
+            </ons-page>
+        </ons-splitter-side>
+        <ons-splitter-content id="content" page="dashboard.html"></ons-splitter-content>
+    </ons-splitter>
+        
+    <template id="dashboard.html">
+        <ons-page>
+            <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center toolbar_title">
+                Dashboard
+            </div>
+            </ons-toolbar>
+            <p style="text-align: center; opacity: 0.6; padding-top: 20px;" id="dashboard_notes-text">
+                
+            </p>
+
+            <ons-list id="dashboard_notes-list">
+            </ons-list>
+
+            <ons-fab onclick="fn.load('new_note.html')" position="bottom right">+</ons-fab>
+
+        </ons-page>
+    </template>
+
+    <template id="new_note.html">
+        <ons-page>
+            <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center toolbar_title">
+                Add a new note
+            </div>
+            </ons-toolbar>
+
+            <div style="margin-left:10px; margin-right: 10px;">
+                <div style="text-align: center; opacity: 0.6; padding-top: 20px;">
+                    <input type="text" class="text-input text-input--underbar" placeholder="Note title" value="" id="newUserNoteTitle" style="width:100%;">
+                </div>
+
+                <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+                    <textarea class="textarea" rows="3" placeholder="Note content" style="width:100%; height: 50vh;" id="newUserNote"></textarea>
+                </p>
+
+                <p style="margin-top: 30px; text-align: center;">
+                    <ons-button style="width:50%;" id="notes_save-btn">Save</ons-button>
+                </p>
+
+            </div>
+
+        </ons-page>
+    </template>
+
+    <template id="edit_note.html">
+        <ons-page>
+            <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center toolbar_title">
+                Edit your note
+            </div>
+            </ons-toolbar>
+
+            <div style="margin-left:10px; margin-right: 10px;">
+                <div style="text-align: center; opacity: 0.6; padding-top: 20px;">
+                    <input type="text" class="text-input text-input--underbar" placeholder="Note title" value="" id="edit-note_title" style="width:100%;">
+                </div>
+
+                <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+                    <textarea class="textarea" rows="3" placeholder="Note content" style="width:100%; height: 50vh;" id="edit-note_textarea"></textarea>
+                </p>
+
+                <p style="margin-top: 30px; text-align: center;">
+                    <ons-button style="width:50%;" id="edit-note_save-btn">Save</ons-button>
+                </p>
+
+            </div>
+
+        </ons-page>
+    </template>
+
+
+    <template id="export.html">
+        <ons-page>
+            <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center toolbar_title">
+                Export Notes
+            </div>
+            </ons-toolbar>
+
+            <p style="margin-top: 30px; text-align: center;">
+                <ons-button id="export_json-btn">Export as JSON</ons-button>
+            </p>
+
+            <p style="margin-top: 30px; text-align: center;">
+                <ons-button id="export_csv-btn">Export as CSV</ons-button>
+            </p>
+
+        </ons-page>
+    </template>
+
+
+    <template id="note_view.html">
+        <ons-page>
+            <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center toolbar_title">
+                View Note
+            </div>
+            </ons-toolbar>
+
+            <p style="margin-top: 30px; text-align: left; padding: 25px; width:90%;" id="note_view-content">
+                
+            </p>
+
+
+            <ons-tabbar swipeable position="auto">
+                <ons-tab id="note_view-tab-home" label="Home" icon="ion-home, material:md-home">
+                </ons-tab>
+                <ons-tab id="note_view-tab-edit" label="Edit" icon="fa-file">
+                </ons-tab>                
+                <ons-tab id="note_view-tab-delete" label="Delete" icon="md-settings">
+                </ons-tab>
+            </ons-tabbar>
+
+        </ons-page>
+    </template>
+
+    <template id="alert-dialog.html">
+        <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+            <div class="alert-dialog-title">Alert</div>
+            <div class="alert-dialog-content">
+                Do really want to delete this note?
+            </div>
+            <div class="alert-dialog-footer">
+                <ons-alert-dialog-button id="note_view-alert-dialog-cancel-btn" >Cancel</ons-alert-dialog-button>
+                <ons-alert-dialog-button id="note_view-alert-dialog-accept-btn">OK</ons-alert-dialog-button>
+            </div>
+        </ons-alert-dialog>
+    </template>
+
+
+    <script src="app.js" ></script>
+
+</body>
+</html>

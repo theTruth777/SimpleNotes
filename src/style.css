@@ -1,0 +1,45 @@
+.toolbar {
+	background-color: #212121;
+}
+
+.toolbar_title {
+	color: #DEE3EC;
+}
+
+.page__background {
+	background-color: #303030;
+}
+
+.page__content {
+	color: #DEE3EC;
+}
+
+.list-item {
+	background-color: #424242;
+	color: #DEE3EC;
+}
+
+.dashboard_ons-item:nth-child(odd) {
+	background-color: #424242;
+	color: #DEE3EC;
+}
+
+.dashboard_ons-item:nth-child(even) {
+	background-color: #303030;
+	color: #DEE3EC;
+}
+
+.textarea {
+	border-radius: 0px;
+	background-color: #303030;
+	color: #ffffff;
+	border: 0px;
+}
+
+.tabbar {
+	background-color: #212121;
+}
+
+.text-input {
+	color: #ffffff;
+}
