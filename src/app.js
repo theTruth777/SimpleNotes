@@ -2,6 +2,12 @@
 
     ons.ready(function() {
 
+        //Disable the back button, redirect to the dashboard.
+        ons.disableDeviceBackButtonHandler();      
+        window.document.addEventListener('backbutton', function() {
+            fn.load('dashboard.html');
+        }, false);
+
         //enable menu functioanlity
         let menu = new MenuController();
         menu._setMenuListeners();
