@@ -153,15 +153,21 @@
                 
             </p>
 
+            <ons-speed-dial position="bottom right" direction="up">
+                <ons-fab>
+                    <ons-icon icon="md-settings"></ons-icon>
+                </ons-fab>
 
-            <ons-tabbar swipeable position="auto">
-                <ons-tab id="note_view-tab-home" label="Home" icon="ion-home, material:md-home">
-                </ons-tab>
-                <ons-tab id="note_view-tab-edit" label="Edit" icon="fa-file">
-                </ons-tab>                
-                <ons-tab id="note_view-tab-delete" label="Delete" icon="md-settings">
-                </ons-tab>
-            </ons-tabbar>
+                <ons-speed-dial-item>
+                    <ons-icon id="note_view-tab-home" icon="ion-home"></ons-icon>
+                </ons-speed-dial-item>
+                <ons-speed-dial-item>
+                    <ons-icon id="note_view-tab-edit" icon="md-edit"></ons-icon>
+                </ons-speed-dial-item>
+                <ons-speed-dial-item>
+                    <ons-icon id="note_view-tab-delete" icon="md-delete"></ons-icon>
+                </ons-speed-dial-item>
+            </ons-speed-dial>
 
         </ons-page>
     </template>
