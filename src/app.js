@@ -8,7 +8,7 @@
             fn.load('dashboard.html');
         }, false);
 
-        //enable menu functioanlity
+        //enable menu functionality
         let menu = new MenuController();
         menu._setMenuListeners();
 
@@ -23,7 +23,7 @@
     class NotesController {
 
         saveNotes(){
-            $( "#notes_save-btn" ).click(function() {
+            document.getElementById("notes_save-btn").addEventListener("click", function(){
                 let userNote = document.getElementById('newUserNote').value;
                 let userNoteTitle = document.getElementById('newUserNoteTitle').value;
 
@@ -31,7 +31,7 @@
                     ons.notification.alert('Your note is empty!');
                     return;
                 }
-                
+
                 let localstorageValue = {'title': userNoteTitle, 'content': userNote, 'timestamp': new Date().getTime()};
                 localStorage.setItem('A' + new Date().getTime(), JSON.stringify(localstorageValue));
 
@@ -45,17 +45,17 @@
 
             var that = this;
 
-            $('#note_view-content').html(parsedString.content);
+            document.getElementById("note_view-content").innerHTML = parsedString.content;
 
-            $("#note_view-tab-home").click(function() {
+            document.getElementById("note_view-tab-home").addEventListener("click", function(){
                 fn.load('dashboard.html');
             });
 
-            $("#note_view-tab-edit").click(function() {
+            document.getElementById("note_view-tab-edit").addEventListener("click", function(){
                 fn.load('edit_note.html', key);
             });
 
-            $("#note_view-tab-delete").click(function() {
+            document.getElementById("note_view-tab-delete").addEventListener("click", function(){
 
                 let dialog = document.getElementById('my-alert-dialog');
 
@@ -65,11 +65,11 @@
                     ons.createElement('alert-dialog.html', { append: true }).then(function(dialog) {
                         dialog.show();
 
-                        $("#note_view-alert-dialog-cancel-btn").click(function() {
+                        document.getElementById("note_view-alert-dialog-cancel-btn").addEventListener("click", function(){
                             dialog.hide();
                         });
 
-                        $("#note_view-alert-dialog-accept-btn").click(function() {
+                        document.getElementById("note_view-alert-dialog-accept-btn").addEventListener("click", function(){
                             that.deleteNote(key);
                             dialog.hide();
                         });
@@ -86,11 +86,10 @@
             let storageItem = localStorage.getItem(key);
             let parsedString = JSON.parse(storageItem);
 
-            $('#edit-note_title').val(parsedString.title);
-            $('#edit-note_textarea').val(parsedString.content);
+            document.getElementById("edit-note_title").value = parsedString.title;
+            document.getElementById("edit-note_textarea").value = parsedString.content;
 
-            $("#edit-note_save-btn").click(function() {
-
+            document.getElementById("edit-note_save-btn").addEventListener("click", function(){
                 let userNoteTitle = document.getElementById('edit-note_title').value;
                 let userNote = document.getElementById('edit-note_textarea').value;
 
@@ -99,10 +98,7 @@
 
                 fn.load('dashboard.html');
             });
-
         }
-
-
 
         deleteNote(key){
             localStorage.removeItem(key);
@@ -114,15 +110,15 @@
     class MenuController {
 
         _setMenuListeners(){
-            $("#sidebar_dashboard").click(function() {
+            document.getElementById("sidebar_dashboard").addEventListener("click", function(){
                 fn.load('dashboard.html');
             });
 
-            $("#sidebar_new-note").click(function() {
+            document.getElementById("sidebar_new-note").addEventListener("click", function(){
                 fn.load('new_note.html');
             });
 
-            $("#sidebar_export").click(function() {
+            document.getElementById("sidebar_export").addEventListener("click", function(){
                 fn.load('export.html');
             });
         }
@@ -136,24 +132,25 @@
             var getAllLocaleStorageElements = this.allStorage();
 
             if(getAllLocaleStorageElements.length > 0){
-                $('#dashboard_notes-text').html("Your saved notes:");
+
+                document.getElementById("dashboard_notes-text").innerHTML = "Your saved notes:";
 
                 let notesCount = getAllLocaleStorageElements.length;
                 for(let i = 0; i < notesCount; i++){
-                    $('#dashboard_notes-list').append(
-                        '<ons-list-item class="dashboard_ons-item" id=' +  getAllLocaleStorageElements[i].key 
-                        +'><span class="list-item__title">' + getAllLocaleStorageElements[i].value.title + '</span>' 
-                        +'<span class="list-item__subtitle">' + getAllLocaleStorageElements[i].value.content.substring(0, 25) + '...' +'</span></ons-list-item>'
-                        );
-                 
-                    $('#' + getAllLocaleStorageElements[i].key).click(function() {
+
+                    document.getElementById("dashboard_notes-list").innerHTML += '<ons-list-item class="dashboard_ons-item" id=' + getAllLocaleStorageElements[i].key
+                        +'><span class="list-item__title">' + getAllLocaleStorageElements[i].value.title + '</span>'
+                        +'<span class="list-item__subtitle">' + getAllLocaleStorageElements[i].value.content.substring(0, 25)
+                        + '...' +'</span></ons-list-item>';
+
+                    document.getElementById(getAllLocaleStorageElements[i].key).addEventListener("click", function(){
                         fn.load('note_view.html', getAllLocaleStorageElements[i].key);
                     });
                 }
 
             }else{
 
-                $('#dashboard_notes-text').html("You have no notes!");
+                document.getElementById("dashboard_notes-text").innerHTML = "You have no notes!";
 
             }
         }
@@ -177,29 +174,14 @@
     class ExportController {
 
         setEventListener(){
-            var that = this;
-            $("#export_json-btn").click(function() {
-                alert(9);
+            document.getElementById('export_json-btn').addEventListener("click", function(){
+                ons.notification.alert('Currenlty not possible :(');
             });
 
-            $("#export_csv-btn").click(function() {
-                that.exportCsv();
+            document.getElementById('export_csv-btn').addEventListener("click", function(){
+                ons.notification.alert('Currenlty not possible :(');
             });
 
-        }
-
-        exportCsv(){
-            let dashboard = new DashboardController();
-            let getItems = dashboard.allStorage();
-
-            let exportString = '';
-
-            for(let i = 0; i < getItems.length; i++){
-                exportString = exportString + getItems[i].value + ','
-            }
-            
-            let encodedUri = encodeURI(exportString);
-            window.open(encodedUri);
         }
     }
 
