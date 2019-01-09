@@ -27,6 +27,8 @@
                 let userNote = document.getElementById('newUserNote').value;
                 let userNoteTitle = document.getElementById('newUserNoteTitle').value;
 
+                userNote = userNote .replace(/\n/g, "<br>");
+
                 if((userNote === '') ||(userNoteTitle === '')) {
                     ons.notification.alert('Your note is empty!');
                     return;
@@ -140,12 +142,17 @@
 
                     document.getElementById("dashboard_notes-list").innerHTML += '<ons-list-item class="dashboard_ons-item" id=' + getAllLocaleStorageElements[i].key
                         +'><span class="list-item__title">' + getAllLocaleStorageElements[i].value.title + '</span>'
-                        +'<span class="list-item__subtitle">' + getAllLocaleStorageElements[i].value.content.substring(0, 25)
+                        +'<span class="list-item__subtitle">' + getAllLocaleStorageElements[i].value.content.substring(0, 25).replace(/<br>/g, " ")
                         + '...' +'</span></ons-list-item>';
+
+                }
+
+                for(let i = 0; i < notesCount; i++){
 
                     document.getElementById(getAllLocaleStorageElements[i].key).addEventListener("click", function(){
                         fn.load('note_view.html', getAllLocaleStorageElements[i].key);
                     });
+
                 }
 
             }else{
